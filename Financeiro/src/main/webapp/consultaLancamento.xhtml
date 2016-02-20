@@ -1,0 +1,122 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./WEB-INF/Layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+   <ui:define name="content">
+
+      <f:metadata>
+         <f:viewAction action="#{lancamentoConsultaController.init()}"/>
+      </f:metadata>
+
+      <h1>Lançamentos</h1>
+
+      <h:form>
+
+         <button jsf:outcome="novoLancamento" class="btn btn-primary" title="Consultar" 
+                 style="margin-left: 5px;">
+            Novo Lançamento
+            <span class="glyphicon glyphicon-plus"></span>
+         </button>
+
+         <h:panelGrid columns="2" style="float: right;">
+            <h:inputText value="#{envioEmailController.email}" styleClass="form-control" size="40"
+                         required="true" requiredMessage="Por favor, informe um e-mail"
+                         pt:placeholder="Entre com e-mail"/>
+            <h:commandButton value="Enviar e-mail" actionListener="#{envioEmailController.enviarLancamento()}"
+                             styleClass="btn btn-success" style="margin-left: 5px;"/>
+         </h:panelGrid>
+
+         <div class="panel panel-primary" style="margin-top: 15px;">
+            <div class="panel-heading">
+               <h3 class="panel-title">Listagem de Receitas / Despesas</h3>
+            </div>
+            <div class="panel-body">
+               <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
+                           errorClass="alert alert-danger" styleClass="message-style"/>
+
+               <h:panelGrid columns="2" style="float: right; margin-right: 10px;">
+                  <h:outputLabel value="Valor Total: " style="font-size: 15px;"/>
+                  <h:outputLabel value="#{lancamentoConsultaController.valorTotal}" 
+                                 style="margin-left: 5px; color: #c23030; font-size: 15px;">
+                     <f:convertNumber locale="pt_BR" type="currency"/>
+                  </h:outputLabel>
+               </h:panelGrid>
+
+
+               <h:dataTable var="lancamentos" value="#{lancamentoConsultaController.lancamentos}" width="100%"
+                            styleClass="table table-bordered 
+                            table-condensed table-hover table-striped">
+
+                  <h:column>
+                     <f:facet name="header">Tipo</f:facet>
+                     <h:graphicImage library="img" name="despesa.png" 
+                                     rendered="#{lancamentos.tipoLancamento eq 'DESPESA'}"/>
+                     <h:graphicImage library="img" name="receita.png" 
+                                     rendered="#{lancamentos.tipoLancamento eq 'RECEITA'}"/>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Conta</f:facet>
+                     <h:outputText value="#{lancamentos.pessoa.nome}"/>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Descrição</f:facet>
+                     <h:outputText value="#{lancamentos.descricao}"/>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Data Vencimento</f:facet>
+                     <h:outputText value="#{lancamentos.dataVencimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                     </h:outputText>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Data Pagamento</f:facet>
+                     <h:outputText value="#{lancamentos.dataPagamento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                     </h:outputText>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Valor</f:facet>
+                     <h:outputText value="#{lancamentos.valor}" 
+                                   styleClass="#{lancamentos.tipoLancamento.toString().toLowerCase()}">
+                        <f:convertNumber type="currency" locale="pt_BR"/>
+                     </h:outputText>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Situação</f:facet>
+                     <h:outputText value="Pago" rendered="#{lancamentos.pago}"/>
+                     <h:outputText value="Aberto" rendered="#{not lancamentos.pago}"/>
+                  </h:column>
+
+                  <h:column>
+                     <f:facet name="header">Ações</f:facet>
+                     <h:link outcome="novoLancamento" styleClass="btn btn-primary btn-xs" title="Editar">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        <f:param name="codigo" value="#{lancamentos.id}" />
+                     </h:link>
+                     |
+                     <h:commandLink action="#{lancamentoConsultaController.excluir()}"
+                                    styleClass="btn btn-danger btn-xs" title="Excluir">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <f:setPropertyActionListener value="#{lancamentos}"
+                                                     target="#{lancamentoConsultaController.lancamentoSelecionado}"/>
+                        <f:ajax render="@form"/>
+                     </h:commandLink>
+                  </h:column>
+
+               </h:dataTable>
+            </div>
+         </div>
+      </h:form>
+   </ui:define>
+
+</ui:composition>

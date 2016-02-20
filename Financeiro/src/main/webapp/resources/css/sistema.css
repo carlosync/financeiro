@@ -1,0 +1,96 @@
+
+body {
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0px;
+}
+
+a {
+    font-weight: bold;
+    color: #003399;
+}
+
+#content h1 {
+    background: url(../resources/img/tela.png) no-repeat 0px 3px;
+    padding-left: 20px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #3e3e3e;
+    letter-spacing: -1px;
+}
+
+.form-grid {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    margin-top: 8px;
+    padding-top: 5px;
+}
+
+.form-grid .label {
+    font-weight: bold;
+    text-align: right;
+    padding: 0px 5px;
+}
+
+.form-grid .campo {
+    padding-right: 5px;
+}
+
+
+#header, #content, #footer {
+    padding: 8px;
+}
+
+#header {
+    height: 61px;
+/*    background-color: #e2e2e2;*/
+    background-color: #337ab7;
+/*    background-color: #29b6f6;*/
+    box-shadow: 0px 2px 2px #ccc;
+}
+
+#header h1 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.logo {
+    margin-top: 5px;
+/*    margin-bottom: 25px;*/
+    margin-left: 15px;
+    float: left;
+}
+
+.logged-user {
+    margin-right: 10px;
+}
+
+.menu {
+    margin-top: 15px;
+    float: right;
+}
+
+#footer {
+    font-size: 10px;
+    color: #9b9b9b;
+    margin-top: 10px;
+    border-top: 1px solid #cfcfcf;
+    text-align: center;
+}
+
+.message-style{
+    list-style-type: none;
+}
+
+.despesa{
+    color: #c23030;
+    font-weight: bold;
+}
+
+.receita{
+    color: #337ab7;
+/*    color: #5cb85c;*/
+    font-weight: bold;
+}

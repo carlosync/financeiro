@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+   <h:head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <h:outputStylesheet library="css" name="bootstrap.css"/>
+      <h:outputStylesheet library="css" name="sistema.css"/>
+      <title>Sistema Financeiro - Login</title>
+   </h:head>
+
+   <h:body style="background-color:#ebeced;">
+
+      <h:form>
+         <div class="container">
+            <p><br/></p>
+            <div class="row">
+               <div class="col-md-11">
+                  <div class="col-md-8">
+                     <h1 style="font-size: 33px; color: #3b414a;">Sistema de Controle Financeiro</h1>
+                     <br/>
+                     <p class="text-justify"><b>O E-gestor</b> é totalmente online. Funciona direto no seu navegador. Agora ficou fácil de você acompanhar o andamento de sua empresa de qualquer lugar. 
+                        Esteja viajando a negócios, em casa ou mesmo na praia, de férias, você não se descuida e obtém informações em tempo real de tudo o que está ocorrendo.
+                        O eGestor é um sistema fácil. Grande parte do nosso tempo de desenvolvimento é pensando no impacto que determinada funcionalidade vai ter na facilidade de uso do sistema. 
+                        E esse trabalho é continuo, estamos sempre estudando maneiras de melhorar a experiência do nosso cliente em relação ao uso do sistema.
+                     </p>
+
+                     <p class="text-justify">Seus dados estão mais seguros no eGestor do que em um software instalado em uma máquina na sua empresa. 
+                        Clique aqui e saiba mais sobre a segurança no eGestor.
+                        Recentemente contratamos uma empresa para fazer uma pesquisa entre nossos clientes, uma dos pontos da pesquisa foi avaliar a confiança que nossos clientes 
+                        tem em relação ao eGestor. De uma nota de 0 a 10 nossa nota foi de 9,18. 
+                     </p>
+
+                     <p class="text-justify">
+                        Uma vez que o sistema é on-line, nossas atenções estão diariamente focadas em busca de melhorias. 
+                        Sempre que criarmos algo novo, nossos clientes tem acesso instantaneamente, sem a necessidade de atualizar e muito menos pagar por isso. 
+                        Em outras palavras, seu sistema sempre estará em dia.
+                     </p>
+
+                  </div>
+                  <div class="col-lg-4" style="margin-top: 65px;">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <h3>Login de Acesso</h3>
+                        </div>
+                        <div class="panel-body">
+
+                           <h:messages showDetail="false" showSummary="true"
+                                       errorClass="alert alert-danger" styleClass="message-style"/>
+
+                           <div class="form-group">
+                              <label for="email">E-mail:</label>
+                              <div class="input-group">
+                                 <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                 </span>
+                                 <h:inputText value="#{indexController.usuario.email}" 
+                                              id="email" styleClass="form-control" pt:placeholder="Entre com seu e-mail"/>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <label for="senha">Senha:</label>
+                              <div class="input-group">
+                                 <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                 </span>
+                                 <h:inputSecret id="senha" value="#{indexController.usuario.senha}"
+                                                styleClass="form-control" pt:placeholder="Entre com sua senha"/>
+                              </div>    
+                           </div>
+                           <hr/>
+                           <button jsf:action="#{indexController.iniciarSessao()}"
+                                   type="submit" class="btn btn-success btn-block btn-lg">Entrar</button>
+
+
+                           <p><br/></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </h:form>
+   </h:body>
+</html>
