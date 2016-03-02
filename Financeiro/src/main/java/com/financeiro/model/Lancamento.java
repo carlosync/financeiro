@@ -16,13 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "lancamento")
 public class Lancamento implements Serializable{
+
+   private static final long serialVersionUID = 1L;
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
@@ -46,6 +46,10 @@ public class Lancamento implements Serializable{
     @Temporal(TemporalType.DATE)
     @Column(name = "data_pagamento")
     private Date dataPagamento;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "mes_conta", length = 10)
+    private Mes mes;
     
     @ManyToOne
     @JoinColumn(name = "cod_pessoa", nullable = false)
@@ -118,6 +122,14 @@ public class Lancamento implements Serializable{
     public void setTipoLancamento(TipoLancamento tipoLancamento) {
         this.tipoLancamento = tipoLancamento;
     }
+
+   public Mes getMes() {
+      return mes;
+   }
+
+   public void setMes(Mes mes) {
+      this.mes = mes;
+   }
     
     @Override
     public int hashCode() {

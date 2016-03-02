@@ -16,6 +16,8 @@ import javax.inject.Named;
 @ViewScoped
 public class LancamentoConsultaController implements Serializable {
 
+   private static final long serialVersionUID = 1L;
+
     @EJB
     private LancamentoFacadeLocal lancamentoFacadeLocal;
     @EJB

@@ -28,12 +28,13 @@ public class LancamentoFacade extends AbstractFacade<Lancamento> implements Lanc
     @Override
     public List<Lancamento> listarTodas() {
         return this.em.createQuery("from Lancamento l inner join fetch l.pessoa "
-                + "order by l.dataVencimento", Lancamento.class).getResultList();
+                + "order by l.pago", Lancamento.class).getResultList();
     }
     
     @Override
     public BigDecimal valorTotal(){
-        BigDecimal valor = this.em.createQuery("select sum(valor) from Lancamento", BigDecimal.class).getSingleResult();
+        BigDecimal valor = this.em.createQuery("select sum(valor) from Lancamento where pago = false", 
+                BigDecimal.class).getSingleResult();
         return valor;
     }
 

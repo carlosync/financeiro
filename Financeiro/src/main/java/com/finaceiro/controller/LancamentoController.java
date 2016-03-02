@@ -3,11 +3,13 @@ package com.finaceiro.controller;
 import com.financeiro.ejb.PessoaFacadeLocal;
 import com.financeiro.service.FacesUtil;
 import com.financeiro.model.Lancamento;
+import com.financeiro.model.Mes;
 import com.financeiro.model.Pessoa;
 import com.financeiro.model.TipoLancamento;
 import com.financeiro.service.LancamentoService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
@@ -20,10 +22,13 @@ import javax.inject.Named;
 @ViewScoped
 public class LancamentoController implements Serializable {
 
+   private static final long serialVersionUID = 1L;
+
     @Inject
     private Lancamento lancamento;
     
     private List<Pessoa> pessoas = new ArrayList<>();
+    private List<Mes> meses = new ArrayList<>();
     
     @EJB
     private LancamentoService lancamentoService;
@@ -33,6 +38,7 @@ public class LancamentoController implements Serializable {
 
     public void init() {
         this.pessoas = pessoaFacadeLocal.buscarTodas();
+        this.meses = Arrays.asList(Mes.values());
     }
     
     public void limparCampos(){
@@ -53,7 +59,6 @@ public class LancamentoController implements Serializable {
         } catch (Exception e) {
             FacesUtil.addErrorMessage(e.getMessage());
         }
-
     }
 
     public TipoLancamento[] getTipos() {
@@ -72,5 +77,8 @@ public class LancamentoController implements Serializable {
         return pessoas;
     }
 
-    
+   public List<Mes> getMeses() {
+      return meses;
+   }
+
 }
