@@ -44,6 +44,7 @@ public class LancamentoFacade extends AbstractFacade<Lancamento> implements Lanc
         Criteria criteria = session.createCriteria(Lancamento.class)
                 .add(Restrictions.eq("tipoLancamento", lancamento.getTipoLancamento()))
                 .add(Restrictions.eq("pessoa", lancamento.getPessoa()))
+                .add(Restrictions.eq("mes", lancamento.getMes()))
                 .add(Restrictions.ilike("descricao", lancamento.getDescricao()))
                 .add(Restrictions.eq("valor", lancamento.getValor()))
                 .add(Restrictions.eq("dataVencimento", lancamento.getDataVencimento()));
