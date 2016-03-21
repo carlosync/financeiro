@@ -94,3 +94,8 @@ a {
 /*    color: #5cb85c;*/
     font-weight: bold;
 }
+
+.colunaTable{
+   width: 100px;
+   text-align: center;
+}

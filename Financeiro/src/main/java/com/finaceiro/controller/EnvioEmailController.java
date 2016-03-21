@@ -16,6 +16,8 @@ import javax.inject.Named;
 @RequestScoped
 public class EnvioEmailController implements Serializable {
 
+   private static final long serialVersionUID = 1L;
+
    @Inject
    private Mailer mailer;
    

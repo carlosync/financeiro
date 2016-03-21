@@ -26,7 +26,7 @@
             <h:inputText value="#{envioEmailController.email}" styleClass="form-control" size="40"
                          required="true" requiredMessage="Por favor, informe um e-mail"
                          pt:placeholder="Entre com e-mail"/>
-            <h:commandButton value="Enviar e-mail" actionListener="#{envioEmailController.enviarLancamento()}"
+            <h:commandButton value="Enviar por e-mail" actionListener="#{envioEmailController.enviarLancamento()}"
                              styleClass="btn btn-success" style="margin-left: 5px;"/>
          </h:panelGrid>
 
@@ -102,9 +102,10 @@
                      <h:outputText value="Aberto" rendered="#{not lancamentos.pago}"/>
                   </h:column>
 
-                  <h:column>
+                  <h:column headerClass="colunaTable">
                      <f:facet name="header">Ações</f:facet>
-                     <h:link outcome="novoLancamento" styleClass="btn btn-primary btn-xs" title="Editar">
+                     <h:link outcome="novoLancamento" styleClass="btn btn-primary btn-xs" title="Editar"
+                             style="margin-left: 15px;">
                         <span class="glyphicon glyphicon-edit"></span>
                         <f:param name="codigo" value="#{lancamentos.id}" />
                      </h:link>

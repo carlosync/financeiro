@@ -10,6 +10,8 @@ import javax.inject.Inject;
 @RequestScoped
 public class Mailer implements Serializable{
 
+   private static final long serialVersionUID = 1L;
+
    @Inject
    private SessionConfig mailConfig;
    
