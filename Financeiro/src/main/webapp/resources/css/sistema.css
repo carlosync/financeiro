@@ -21,11 +21,11 @@ a {
 }
 
 .form-grid {
-    background-color: #f2f2f2;
+    background-color: #f7f7f7;
     border-radius: 8px;
     border: 1px solid #cccccc;
     margin-top: 8px;
-    padding-top: 5px;
+    padding: 8px 8px;
 }
 
 .form-grid .label {
@@ -44,7 +44,7 @@ a {
 }
 
 #header {
-    height: 61px;
+    height: 71px;
 /*    background-color: #e2e2e2;*/
     background-color: #337ab7;
 /*    background-color: #29b6f6;*/

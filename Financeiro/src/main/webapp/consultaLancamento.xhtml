@@ -16,7 +16,7 @@
 
       <h:form>
 
-         <button jsf:outcome="novoLancamento" class="btn btn-primary" title="Consultar" 
+         <button jsf:outcome="lancamentos" class="btn btn-info" title="Consultar" 
                  style="margin-left: 5px;">
             Novo Lançamento
             <span class="glyphicon glyphicon-plus"></span>
@@ -27,10 +27,10 @@
                          required="true" requiredMessage="Por favor, informe um e-mail"
                          pt:placeholder="Entre com e-mail"/>
             <h:commandButton value="Enviar por e-mail" actionListener="#{envioEmailController.enviarLancamento()}"
-                             styleClass="btn btn-success" style="margin-left: 5px;"/>
+                             styleClass="btn btn-info" style="margin-left: 5px;"/>
          </h:panelGrid>
 
-         <div class="panel panel-primary" style="margin-top: 15px;">
+         <div class="panel panel-info" style="margin-top: 15px;">
             <div class="panel-heading">
                <h3 class="panel-title">Listagem de Receitas / Despesas</h3>
             </div>
@@ -104,7 +104,7 @@
 
                   <h:column headerClass="colunaTable">
                      <f:facet name="header">Ações</f:facet>
-                     <h:link outcome="novoLancamento" styleClass="btn btn-primary btn-xs" title="Editar"
+                     <h:link outcome="lancamentos" styleClass="btn btn-primary btn-xs" title="Editar"
                              style="margin-left: 15px;">
                         <span class="glyphicon glyphicon-edit"></span>
                         <f:param name="codigo" value="#{lancamentos.id}" />

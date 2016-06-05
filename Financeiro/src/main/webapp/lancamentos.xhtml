@@ -1,0 +1,170 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./WEB-INF/Layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:o="http://omnifaces.org/ui">
+
+   <ui:define name="content">
+
+      <f:metadata>
+         <f:viewParam name="codigo" value="#{lancamentoController.lancamento}"
+                      converter="lancamentoConverter"/>
+         <f:viewAction action="#{lancamentoController.init()}"/>
+      </f:metadata>
+
+      <h1>Novo Lançamento</h1>
+
+      <h:form id="frm" prependId="false">
+
+         <div class="panel panel-info" style="margin-top: 15px;">
+            <div class="panel-heading">
+               <h3 class="panel-title">Dados do Lançamento</h3>
+            </div>
+            <div class="panel-body">
+               <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
+                           errorClass="alert alert-danger" styleClass="message-style"/>
+
+               <div jsf:id="panel-form" class="col-md-12 form-grid">
+                  <div class="row">
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="tipo">Tipo:</label>
+                           <h:selectOneMenu id="tipo" class="form-control" value="#{lancamentoController.lancamento.tipoLancamento}"
+                                            required="true" label="Tipo de Lançamento">
+                              <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                              <f:selectItems value="#{lancamentoController.tipos}" var="tipo"
+                                             itemLabel="#{tipo.descricao}" itemValue="#{tipo}"/>
+                           </h:selectOneMenu>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="pessoa" class="control-label">Conta:</label>
+                           <h:selectOneMenu id="pessoa" value="#{lancamentoController.lancamento.pessoa}" 
+                                            styleClass="form-control" required="true" label="Pessoa"
+                                            converter="pessoaConverter">
+                              <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                              <f:selectItems value="#{lancamentoController.pessoas}" var="pessoa"
+                                             itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"/>
+                           </h:selectOneMenu>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="mes" class="control-label">Mês:</label>
+                           <h:selectOneMenu id="mes" value="#{lancamentoController.lancamento.mes}" 
+                                            class="form-control" required="true" label="Mês">
+                              <f:selectItem itemLabel="Selecione" noSelectionOption="true"/>
+                              <f:selectItems value="#{lancamentoController.meses}" var="m"
+                                             itemLabel="#{m.descricao}" itemValue="#{m}"/>
+                           </h:selectOneMenu>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="descricao" class="control-label">Descrição:</label>
+                           <h:inputText id="descricao" value="#{lancamentoController.lancamento.descricao}"
+                                        styleClass="form-control" required="true" label="Descrição">
+                              <f:passThroughAttribute name="placeholder" value="Informe a descrição"/>
+                           </h:inputText>
+                        </div>
+                     </div>
+                  </div> <!-- Fim row 1 -->
+
+                  <div class="row">
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="valor" class="control-label">Valor:</label>
+                           <h:inputText id="valor" value="#{lancamentoController.lancamento.valor}"
+                                        styleClass="form-control moeda" required="true" label="Valor">
+                              <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                              <f:passThroughAttribute name="placeholder" value="Informe o valor"/>
+                           </h:inputText>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="dtvencida" class="control-label">Data Vencimento:</label>
+                           <h:inputText id="dtvencida" value="#{lancamentoController.lancamento.dataVencimento}"
+                                        styleClass="form-control" label="Data Vencimento">
+                              <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                              <f:passThroughAttribute name="placeholder" value="Informe a data de vencimento"/>
+                           </h:inputText>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <label for="paga" class="control-label">Conta Paga:</label>
+                           <h:selectBooleanCheckbox id="paga" value="#{lancamentoController.lancamento.pago}"
+                                                    immediate="true" style="margin-left: 5px;" 
+                                                    valueChangeListener="#{lancamentoController.lancamentoPagoModificado}">
+                              <f:ajax execute="@form" render="frm:panel-form"/>
+                           </h:selectBooleanCheckbox>
+                        </div>
+                     </div>
+
+                     <div class="col-md-3">
+                        <div class="form-group">
+                           <h:outputLabel for="dtPagamento" value="Data Pagamento:" 
+                                          class="control-label" 
+                                          rendered="#{lancamentoController.lancamento.pago}"/>
+                           <h:inputText id="dtPagamento" value="#{lancamentoController.lancamento.dataPagamento}"
+                                        styleClass="form-control" label="Data Pagamento"
+                                        rendered="#{lancamentoController.lancamento.pago}">
+                              <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                              <f:validator validatorId="dataFutura"/>
+                              <f:validator validatorId="requeridoValidator"/>
+                              <f:attribute name="checado" value="#{lancamentoController.lancamento.pago}"/>
+                           </h:inputText>
+                        </div>
+                     </div>
+                  </div> 
+
+                  <div style="text-align: left;">
+                     <h:commandButton value="Salvar" action="#{lancamentoController.salvar()}" 
+                                      class="btn btn-success">
+                        <f:ajax execute="@form" render="@all"/>
+                     </h:commandButton>
+                     <button jsf:outcome="lancamentos" class="btn btn-danger" title="Cancelar" 
+                             style="margin-left: 5px;">
+                        Cancelar <span class="glyphicon glyphicon-trash"></span>
+                     </button>
+                  </div>
+
+                  <script type="text/javascript">
+                     $(document).ready(function () {
+                        $(function () {
+                           $.mask.addPlaceholder("~", "[+-]");
+                           $("#telefone").mask("(99) 9999-9999");
+                           $("#cep").mask("99999-999");
+                           $("#dtvencida").mask("99/99/9999");
+                           $("#dtPagamento").mask("99/99/9999");
+                           $("#cpf").mask("999.999.999-99");
+                           $("#cnpj").mask("99.999.999/9999-99");
+                        });
+                     });
+                  </script>
+
+                  <script>
+                     function configurarMoeda() {
+                        $(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
+                     }
+
+                     $(document).ready(function () {
+                        configurarMoeda();
+                     });
+                  </script>
+               </div>
+            </div>
+         </div>
+      </h:form>
+   </ui:define>
+
+</ui:composition>

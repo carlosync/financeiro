@@ -10,6 +10,7 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <h:outputStylesheet library="css" name="bootstrap.css"/>
+      <h:outputStylesheet library="css" name="bootstrap-flatly.css"/>
       <h:outputStylesheet library="css" name="sistema.css"/>
       <h:outputScript library="js" name="jquery.js"/>
       <h:outputScript library="js" name="bootstrap.min.js"/>
@@ -40,7 +41,7 @@
                      <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu">
-                     <li><a href="novoLancamento.xhtml">Cadastrar</a></li>
+                     <li><a href="lancamentos.xhtml">Cadastrar</a></li>
                   </ul>
                </div>
                <button jsf:action="#{sessaoController.logout()}" jsf:immediate="true" class="btn btn-danger" 

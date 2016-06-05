@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class SessaoController implements Serializable {
 
+   private static final long serialVersionUID = 1L;
+
    public void verificarSessao() throws Exception {
       try {
          FacesContext context = FacesContext.getCurrentInstance();

@@ -23,7 +23,6 @@
                <h3 class="panel-title">Dados do Lançamento</h3>
             </div>
             <div class="panel-body">
-
                <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
                            errorClass="alert alert-danger" styleClass="message-style"/>
 
@@ -52,6 +51,7 @@
                         </h:selectOneMenu>
                      </div>
                   </div>
+
                   <div class="form-group">
                      <label for="mes" class="col-sm-2 control-label">Mês:</label>
                      <div class="col-sm-2">
@@ -126,17 +126,12 @@
                   <div class="form-group">
                      <div class="col-sm-offset-2 col-sm-10">
                         <h:commandButton value="Salvar" action="#{lancamentoController.salvar()}" 
-                                         class="btn btn-primary">
+                                         class="btn btn-success">
                            <f:ajax execute="@form" render="@all"/>
                         </h:commandButton>
-                        <button jsf:outcome="novoLancamento" class="btn btn-danger" title="Cancelar" 
+                        <button jsf:outcome="lancamentos" class="btn btn-danger" title="Cancelar" 
                                 style="margin-left: 5px;">
-                           Cancelar
-                        </button>
-                        <button jsf:outcome="consultaLancamento" class="btn btn-primary" title="Consultar" 
-                                style="margin-left: 15px;">
-                           Consultar
-                           <span class="glyphicon glyphicon-search"></span>
+                           Cancelar <span class="glyphicon glyphicon-trash"></span>
                         </button>
                      </div>
                   </div>
